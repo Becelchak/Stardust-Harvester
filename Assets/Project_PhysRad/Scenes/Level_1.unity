@@ -662,6 +662,22 @@ MonoBehaviour:
     count: 5
     spawnInterval: 1
     delayBeforeWave: 0
+<<<<<<< Updated upstream
+=======
+  - enemyTypePool:
+    - {fileID: 11400000, guid: 4442dcf958c0fe445b33555c740a0716, type: 2}
+    count: 1
+    spawnInterval: 1
+    delayBeforeWave: 0
+  - enemyTypePool:
+    - {fileID: 11400000, guid: a46b71272f7ccfe42a655945271471df, type: 2}
+    - {fileID: 11400000, guid: 0de39d09f4ba1de40bf3c8447567c5aa, type: 2}
+    - {fileID: 11400000, guid: 896ae7fa458f0484684e9a725a55c7af, type: 2}
+    - {fileID: 11400000, guid: 4442dcf958c0fe445b33555c740a0716, type: 2}
+    count: 12
+    spawnInterval: 0.8
+    delayBeforeWave: 0
+>>>>>>> Stashed changes
   spawnPoints:
   - {fileID: 353544038}
   - {fileID: 1080488076}
@@ -1446,7 +1462,7 @@ PrefabInstance:
     - target: {fileID: 7267191849075613216, guid: c9250c3e4617e3840a9d0bf4a1282aa8,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7327531311277104414, guid: c9250c3e4617e3840a9d0bf4a1282aa8,
         type: 3}
