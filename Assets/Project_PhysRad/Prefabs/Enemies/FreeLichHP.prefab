@@ -851,7 +851,11 @@ Transform:
   m_LocalPosition: {x: 0.28566834, y: 0, z: 0.16454203}
   m_LocalScale: {x: 1, y: 1, z: 1}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   m_ConstrainProportionsScale: 0
+=======
+  m_ConstrainProportionsScale: 1
+>>>>>>> Stashed changes
 =======
   m_ConstrainProportionsScale: 1
 >>>>>>> Stashed changes
