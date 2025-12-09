@@ -83,7 +83,7 @@ public class BuildManager : MonoBehaviour, IGameSystem
 
     public void UnregisteredBuilding(IBuildable buildable)
     {
-        if (!activeBuildings.Contains(buildable))
+        if (activeBuildings.Contains(buildable))
         {
             activeBuildings.Remove(buildable);
 

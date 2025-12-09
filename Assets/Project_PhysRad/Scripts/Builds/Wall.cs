@@ -66,11 +66,10 @@ public class Wall : MonoBehaviour, IBuildable, IDamageable
     {
         if (buildCell != null)
         {
-            BuildGridGenerator generator = buildCell.GetComponentInParent<BuildGridGenerator>();
-            if (generator != null)
-                generator.TryRemoveBuildable(this);
+            //BuildGridGenerator generator = buildCell.GetComponentInParent<BuildGridGenerator>();
+            //if (generator != null)
+            //    generator.TryRemoveBuildable(this);
         }
-
         Destroy(gameObject);
     }
 
@@ -130,7 +129,10 @@ public class Wall : MonoBehaviour, IBuildable, IDamageable
         OnAnyBuildDestroyed?.Invoke(this);
 
         if (destroyEffectPrefab != null)
-            Instantiate(destroyEffectPrefab, transform.position, Quaternion.identity);
+        {
+            var destroyPref = Instantiate(destroyEffectPrefab, transform.position, Quaternion.identity);
+            Destroy(destroyPref,1f);
+        }
 
         if (buildCell != null)
         {

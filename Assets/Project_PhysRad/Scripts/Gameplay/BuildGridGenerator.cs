@@ -16,7 +16,7 @@ public class BuildGridGenerator : MonoBehaviour
     [SerializeField] private Material occupiedCellMaterial;
 
     private Dictionary<Vector2Int, BuildCell> gridCells = new Dictionary<Vector2Int, BuildCell>();
-    private Dictionary<IBuildable, BuildCell> buildables = new Dictionary<IBuildable, BuildCell>();
+    //private Dictionary<IBuildable, BuildCell> buildables = new Dictionary<IBuildable, BuildCell>();
 
     void Start()
     {
@@ -78,17 +78,17 @@ public class BuildGridGenerator : MonoBehaviour
         Debug.Log($"Сетка построена: {gridCells.Count} клеток");
     }
 
-    public bool TryRemoveBuildable(IBuildable buildable)
-    {
-        if (!buildables.ContainsKey(buildable))
-            return false;
+    //public bool TryRemoveBuildable(IBuildable buildable)
+    //{
+    //    if (!buildables.ContainsKey(buildable))
+    //        return false;
 
-        BuildCell cell = buildables[buildable];
-        cell.ClearOccupation();
-        buildables.Remove(buildable);
+    //    BuildCell cell = buildables[buildable];
+    //    cell.ClearOccupation();
+    //    buildables.Remove(buildable);
 
-        return true;
-    }
+    //    return true;
+    //}
 
     public bool TryBuildAtCell(BuildCell cell, IBuildable buildablePrefab, out IBuildable builtObject)
     {
@@ -121,12 +121,14 @@ public class BuildGridGenerator : MonoBehaviour
             return false;
         }
 
+        
         cell.SetOccupied(buildable);
         builtObject = buildable;
 
-        buildables.Add(builtObject, cell); 
+        builtObject.OnBuild(cell);
+        //buildables.Add(builtObject, cell); 
 
-        Debug.Log($"Построено на клетке {cell.GridCoordinate}");
+        //Debug.Log($"Построено на клетке {cell.GridCoordinate}");
         return true;
     }
 }
