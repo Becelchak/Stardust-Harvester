@@ -660,14 +660,21 @@ MonoBehaviour:
   waves:
   - enemyTypePool:
     - {fileID: 11400000, guid: 896ae7fa458f0484684e9a725a55c7af, type: 2}
-    count: 5
+    count: 1
+    spawnInterval: 1
+    delayBeforeWave: 0
+  - enemyTypePool:
+    - {fileID: 11400000, guid: 4442dcf958c0fe445b33555c740a0716, type: 2}
+    count: 1
     spawnInterval: 1
     delayBeforeWave: 0
   - enemyTypePool:
     - {fileID: 11400000, guid: a46b71272f7ccfe42a655945271471df, type: 2}
+    - {fileID: 11400000, guid: 0de39d09f4ba1de40bf3c8447567c5aa, type: 2}
     - {fileID: 11400000, guid: 896ae7fa458f0484684e9a725a55c7af, type: 2}
+    - {fileID: 11400000, guid: 4442dcf958c0fe445b33555c740a0716, type: 2}
     count: 12
-    spawnInterval: 1.2
+    spawnInterval: 0.8
     delayBeforeWave: 3
   spawnPoints:
   - {fileID: 353544038}

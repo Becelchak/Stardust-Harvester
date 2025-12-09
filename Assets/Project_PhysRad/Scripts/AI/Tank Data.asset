@@ -19,4 +19,4 @@ MonoBehaviour:
   attackRate: 3
   movementSpeed: 1
   scrapReward: 500
-  prefab: {fileID: 8753619234690991416, guid: e812c04705f47d645beb13e90ec0ff93, type: 3}
+  prefab: {fileID: 8753619234690991416, guid: e47c31ec3eb0bb84d8f1ab3502c730d5, type: 3}

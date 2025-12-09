@@ -117,7 +117,7 @@ public class Enemy : MonoBehaviour, IAttacker, IDamageable, ITarget
     {
 
     }
-    public void Attack(IDamageable target)
+    public virtual void Attack(IDamageable target)
     {
         if (target != null)
         {
@@ -140,7 +140,7 @@ public class Enemy : MonoBehaviour, IAttacker, IDamageable, ITarget
         currentHealth = Mathf.Min(currentHealth + amount, data.maxHealth);
     }
 
-    public void Die()
+    public virtual void Die()
     {
         OnEnemyDied?.Invoke(this);
         OnThisEnemyDied?.Invoke(this);
