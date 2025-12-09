@@ -2786,7 +2786,7 @@ GameObject:
   - component: {fileID: -4622406733715401570}
   - component: {fileID: 7693670140315632968}
   - component: {fileID: 379432454566793868}
-  - component: {fileID: -4968126710149400533}
+  - component: {fileID: 2278225586263299401}
   - component: {fileID: 5247588409656701796}
   - component: {fileID: -4234038078298832467}
   - component: {fileID: -1466631752927052401}
@@ -2932,7 +2932,7 @@ MonoBehaviour:
   slowWhenNotFacingTarget: 1
   whenCloseToDestination: 0
   constrainInsideGraph: 0
---- !u!114 &-4968126710149400533
+--- !u!114 &2278225586263299401
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2941,15 +2941,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 1528915638184230}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fe964e3b1957ff4aa44f9b8e97aadff, type: 3}
+  m_Script: {fileID: 11500000, guid: cdb354ced60b3944f906859cc816ce54, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Shooter.Gameplay.Enemy
-  m_DeathParticlePrefab: {fileID: 5599717751194728857, guid: 20d399b6501120447b60f51be1a00524,
+  m_EditorClassIdentifier: Assembly-CSharp::ExplodingEnemy
+  m_DeathParticlePrefab: {fileID: 5599717751194728857, guid: 08d39fd6d06e46245bad2dfffdea3a62,
     type: 3}
   m_SpawnParticlePrefab: {fileID: 5599717751194728857, guid: edeb26ba555852b4a9bb604952b28208,
     type: 3}
   data: {fileID: 11400000, guid: 4442dcf958c0fe445b33555c740a0716, type: 2}
   currentHealth: 0
+  explosionRadius: 2
+  explosionDamage: 100
+  explosionTargetLayers:
+    serializedVersion: 2
+    m_Bits: 4352
+  explosionEffectPrefab: {fileID: 5599717751194728857, guid: 08d39fd6d06e46245bad2dfffdea3a62,
+    type: 3}
+  warningEffectPrefab: {fileID: 4230452510541733725, guid: 39311bb9ce234df498f87ab6b78a55a9,
+    type: 3}
+  warningDuration: 0.2
+  explodeOnDeath: 1
+  damageSelf: 1
+  damageOtherEnemies: 0
 --- !u!135 &5247588409656701796
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2969,8 +2982,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.1
-  m_Center: {x: 0, y: 0.06, z: 0}
+  m_Radius: 0.15
+  m_Center: {x: 0.03, y: 0.09, z: 0}
 --- !u!33 &-4234038078298832467
 MeshFilter:
   m_ObjectHideFlags: 0

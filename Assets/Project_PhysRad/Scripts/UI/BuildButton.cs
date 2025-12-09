@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class BuildButton : MonoBehaviour
 {
     [SerializeField] private GameObject buildPrefab;
+    [SerializeField] private GameObject previewBuild;
     private Button button;
 
     void Start()
@@ -15,6 +16,6 @@ public class BuildButton : MonoBehaviour
     void OnBuildButtonClick()
     {
         var build = buildPrefab.GetComponent<IBuildable>();
-        GameController.Instance?.BuildManager.SelectBuildable(build);
+        GameController.Instance?.BuildManager.SelectBuildable(build, previewBuild);
     }
 }

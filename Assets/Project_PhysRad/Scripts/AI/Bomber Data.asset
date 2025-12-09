@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   enemyName: Bomber
   maxHealth: 30
-  attackDamage: 0
+  attackDamage: 100
   attackRange: 2
   attackRate: 30
   movementSpeed: 3
