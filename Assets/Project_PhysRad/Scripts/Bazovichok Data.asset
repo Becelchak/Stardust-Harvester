@@ -16,7 +16,7 @@ MonoBehaviour:
   maxHealth: 50
   attackDamage: 30
   attackRange: 1.5
-  attackRate: 3
+  attackRate: 1.5
   movementSpeed: 5
   scrapReward: 100
-  prefab: {fileID: 8753619234690991416, guid: e812c04705f47d645beb13e90ec0ff93, type: 3}
+  prefab: {fileID: 100048, guid: 7ed3e345f07e89940ae0c1e00eeb7d1d, type: 3}

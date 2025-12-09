@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55140790300e7ac47b239da9398aca24, type: 3}
   m_Name: Bomber Data
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
-  enemyName: Tank
-  maxHealth: 100
-  attackDamage: 80
+  enemyName: Bomber
+  maxHealth: 30
+  attackDamage: 0
   attackRange: 1.5
-  attackRate: 3
-  movementSpeed: 1
-  scrapReward: 500
-  prefab: {fileID: 8753619234690991416, guid: e812c04705f47d645beb13e90ec0ff93, type: 3}
+  attackRate: 30
+  movementSpeed: 3
+  scrapReward: 300
+  prefab: {fileID: 1528915638184230, guid: 8e0f285c21cdcf14e8d5c06c57ba936b, type: 3}

@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55140790300e7ac47b239da9398aca24, type: 3}
   m_Name: Sprinter Data
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
-  enemyName: Tank
-  maxHealth: 100
-  attackDamage: 80
+  enemyName: Sprinter
+  maxHealth: 40
+  attackDamage: 30
   attackRange: 1.5
-  attackRate: 3
-  movementSpeed: 1
-  scrapReward: 500
-  prefab: {fileID: 8753619234690991416, guid: e812c04705f47d645beb13e90ec0ff93, type: 3}
+  attackRate: 1
+  movementSpeed: 8
+  scrapReward: 200
+  prefab: {fileID: 6697294229898335401, guid: 7dc7b54399d54194e9f2619f1832e8d5, type: 3}
