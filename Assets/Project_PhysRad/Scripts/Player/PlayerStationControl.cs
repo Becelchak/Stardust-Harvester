@@ -1,4 +1,5 @@
 using Shooter.Gameplay;
+using System;
 using System.Resources;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
@@ -19,6 +20,10 @@ public class PlayerStationControl : MonoBehaviour, IDamageable
     public float AttackRange => data.baseAttackRange;
     public float AttackRate => data.baseAttackRate;
     public bool CanAttack => Time.time >= lastAttackTime + 1f / AttackRate;
+
+    public int CurrentScrap => currentScrap;
+
+    public event Action <int> OnSpendScrap;
 
     void Start()
     {
@@ -44,5 +49,6 @@ public class PlayerStationControl : MonoBehaviour, IDamageable
     public void Die()
     {
         Debug.Log("Station destroyed! Game Over.");
+        Destroy(gameObject, 1f);
     }
 }

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4428245449091408840}
   m_Layer: 12
   m_Name: Wall
-  m_TagString: Untagged
+  m_TagString: Build
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -125,5 +125,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Wall
   buildCost: 100
+  maxHealth: 120
   buildEffectPrefab: {fileID: 727867510251042709, guid: be54e0d45d289ff47ad1d3c3181d505f,
     type: 3}
+  damageEffectPrefab: {fileID: 0}
+  destroyEffectPrefab: {fileID: 5599717751194728857, guid: 72fe020860306d24789b9f95bf684f3d,
+    type: 3}
+  wallRenderer: {fileID: 0}
+  damagedMaterial: {fileID: 0}
+  damageFlashDuration: 0.2

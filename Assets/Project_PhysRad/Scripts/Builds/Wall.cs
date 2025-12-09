@@ -16,9 +16,9 @@ public class Wall : MonoBehaviour, IBuildable, IDamageable
     [SerializeField] private Material damagedMaterial;
     [SerializeField] private float damageFlashDuration = 0.2f;
 
-    public event Action<Wall> OnBuildDamaged;
-    public event Action<Wall> OnBuildDestroyed;
-    public static event Action<Wall> OnAnyBuildDestroyed;
+    public event Action<IBuildable> OnBuildDamaged;
+    public event Action<IBuildable> OnBuildDestroyed;
+    public static event Action<IBuildable> OnAnyBuildDestroyed;
 
     private BuildCell buildCell;
     private Material originalMaterial;
@@ -52,8 +52,8 @@ public class Wall : MonoBehaviour, IBuildable, IDamageable
         currentHealth = maxHealth;
         isAlive = true;
 
-        if (buildEffectPrefab != null)
-            Instantiate(buildEffectPrefab, transform.position, Quaternion.identity);
+        //if (buildEffectPrefab != null)
+        //    Instantiate(buildEffectPrefab, transform.position, Quaternion.identity);
 
         Debug.Log($"Стена построена на клетке {cell.GridCoordinate}, HP: {currentHealth}");
 
@@ -126,7 +126,6 @@ public class Wall : MonoBehaviour, IBuildable, IDamageable
 
         isAlive = false;
 
-        // Вызываем события
         OnBuildDestroyed?.Invoke(this);
         OnAnyBuildDestroyed?.Invoke(this);
 
@@ -148,7 +147,7 @@ public class Wall : MonoBehaviour, IBuildable, IDamageable
         if (wallCollider != null) wallCollider.enabled = false;
         if (wallRenderer != null) wallRenderer.enabled = false;
 
-        Destroy(gameObject, 2f);
+        Destroy(gameObject, 1f);
     }
 
     void OnDestroy()

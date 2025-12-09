@@ -18,7 +18,7 @@ public interface IBuildable
     BuildCell BuildCell { get; set; }
 
 
-    event Action<Wall> OnBuildDamaged;
-    event Action<Wall> OnBuildDestroyed;
-    static event Action<Wall> OnAnyBuildDestroyed;
+    event Action<IBuildable> OnBuildDamaged;
+    event Action<IBuildable> OnBuildDestroyed;
+    static event Action<IBuildable> OnAnyBuildDestroyed;
 }
