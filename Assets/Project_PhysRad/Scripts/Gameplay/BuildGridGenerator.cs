@@ -21,7 +21,7 @@ public class BuildGridGenerator : MonoBehaviour
     void Start()
     {
         GenerateGrid();
-        BuildManager.Instance?.RegisterGrid(this);
+        GameController.Instance?.BuildManager.RegisterGrid(this);
     }
 
     void GenerateGrid()

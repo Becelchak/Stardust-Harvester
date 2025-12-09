@@ -59,7 +59,7 @@ public class Wall : MonoBehaviour, IBuildable, IDamageable
 
         UpdateNavGraph();
 
-        BuildManager.Instance?.RegisterBuilding(this);
+        GameController.Instance?.BuildManager.RegisterBuilding(this);
     }
 
     public void OnDestroyed()
@@ -129,7 +129,6 @@ public class Wall : MonoBehaviour, IBuildable, IDamageable
         OnBuildDestroyed?.Invoke(this);
         OnAnyBuildDestroyed?.Invoke(this);
 
-        // Визуальные эффекты разрушения
         if (destroyEffectPrefab != null)
             Instantiate(destroyEffectPrefab, transform.position, Quaternion.identity);
 
@@ -140,7 +139,7 @@ public class Wall : MonoBehaviour, IBuildable, IDamageable
             UpdateNavGraph();
         }
 
-        BuildManager.Instance?.UnregisterBuilding(this);
+        GameController.Instance?.BuildManager.UnregisteredBuilding(this);
 
         Debug.Log("Стена разрушена!");
 

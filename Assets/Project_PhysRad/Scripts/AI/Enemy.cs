@@ -11,6 +11,8 @@ public class Enemy : MonoBehaviour, IAttacker, IDamageable, ITarget
     protected GameObject m_SpawnParticlePrefab;
     [SerializeField] private EnemyData data;
 
+    private PlayerStationControl stationControl;
+
     private IAstarAI aiAgent;
     private IDamageable targetToAttack;
     private Transform currentTargetTransform;
@@ -35,14 +37,16 @@ public class Enemy : MonoBehaviour, IAttacker, IDamageable, ITarget
     public event Action<Enemy> OnThisEnemyDied;
     public event Action<Enemy, IDamageable> OnTargetChanged;
 
-
     public int currentHealth;
+
     void Start()
     {
 
         GameObject obj = Instantiate(m_SpawnParticlePrefab);
         obj.transform.position = transform.position;
         Destroy(obj, 3);
+
+        stationControl = GameController.Instance?.Station;
 
         currentHealth = data.maxHealth;
         aiAgent = GetComponent<IAstarAI>();
@@ -55,7 +59,6 @@ public class Enemy : MonoBehaviour, IAttacker, IDamageable, ITarget
     {
         if (!IsAlive) return;
 
-        // Улучшенная проверка цели: проверяем не только null, но и IsAlive
         if (!IsTargetValid(targetToAttack))
         {
             FindNewTarget();
@@ -142,7 +145,9 @@ public class Enemy : MonoBehaviour, IAttacker, IDamageable, ITarget
         OnEnemyDied?.Invoke(this);
         OnThisEnemyDied?.Invoke(this);
 
-        PlayerManager.Instance?.AddScrap(data.scrapReward);
+        if (stationControl != null)
+            stationControl.AddScrap(data.scrapReward);
+
 
         if (aiAgent != null)
             aiAgent.isStopped = true;
@@ -172,7 +177,7 @@ public class Enemy : MonoBehaviour, IAttacker, IDamageable, ITarget
     void FindNewTarget()
     {
 
-        IBuildable nearestBuild = BuildManager.Instance?.GetNearestBuilding(transform.position, data.attackRange * 2f);
+        IBuildable nearestBuild = GameController.Instance?.BuildManager.GetNearestBuilding(transform.position, data.attackRange * 2f);
         if (nearestBuild != null)
         {
             var damageblaBuild = ((MonoBehaviour)nearestBuild).GetComponent<IDamageable>();

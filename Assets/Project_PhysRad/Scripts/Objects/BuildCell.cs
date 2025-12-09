@@ -63,26 +63,26 @@ public class BuildCell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (!isBuildable || isOccupied) return;
+        //if (!isBuildable || isOccupied) return;
 
-        SetMaterial(hoverMaterial);
-        BuildManager.Instance?.OnCellHoverEnter(this);
+        //SetMaterial(hoverMaterial);
+        //BuildManager.Instance?.OnCellHoverEnter(this);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (!isBuildable || isOccupied) return;
+        //if (!isBuildable || isOccupied) return;
 
-        SetMaterial(defaultMaterial);
-        BuildManager.Instance?.OnCellHoverExit(this);
+        //SetMaterial(defaultMaterial);
+        //BuildManager.Instance?.OnCellHoverExit(this);
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (!isBuildable || isOccupied) return;
+        //if (!isBuildable || isOccupied) return;
 
-        BuildManager.Instance?.OnCellClicked(this);
-        Debug.Log($"Клик по клетке {gridCoordinate}");
+        //BuildManager.Instance?.OnCellClicked(this);
+        //Debug.Log($"Клик по клетке {gridCoordinate}");
     }
 
     public void SetOccupied(IBuildable buildable)

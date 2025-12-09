@@ -13,4 +13,6 @@ public class StationData : ScriptableObject
 
     [Header("Economy")]
     public int startingScrap = 200;
+
+    public GameObject stationDestroyEffect;
 }

@@ -15,6 +15,6 @@ public class BuildButton : MonoBehaviour
     void OnBuildButtonClick()
     {
         var build = buildPrefab.GetComponent<IBuildable>();
-        BuildManager.Instance.SelectBuildable(build);
+        GameController.Instance?.BuildManager.SelectBuildable(build);
     }
 }

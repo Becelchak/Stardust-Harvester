@@ -7,6 +7,10 @@ using UnityEngine;
 public class WaveManager : MonoBehaviour
 {
     public static WaveManager Instance { get; private set; }
+    [SerializeField] private int scrapRewardPerWave = 200;
+
+    private PlayerStationControl stationControl;
+    private int currentWave = 0;
 
     [SerializeField] private List<Wave> waves;
     [SerializeField] private Transform[] spawnPoints;
@@ -14,6 +18,11 @@ public class WaveManager : MonoBehaviour
 
     private int currentWaveIndex = 0;
     private bool isSpawning = false;
+
+    public void Initialize(PlayerStationControl station)
+    {
+        stationControl = station;
+    }
 
     void Awake()
     {
@@ -50,6 +59,19 @@ public class WaveManager : MonoBehaviour
 
         Debug.Log("Волны кончились!");
     }
+    public void CompleteWave()
+    {
+        currentWave++;
+
+        if (stationControl != null)
+        {
+            int reward = scrapRewardPerWave * currentWave;
+            stationControl.AddScrap(reward);
+            Debug.Log($"Wave {currentWave} complete! +{reward} scrap");
+        }
+
+        StartCoroutine(WaveSpawner());
+    }
 
     void SpawnEnemy(EnemyData enemyData)
     {
@@ -59,6 +81,7 @@ public class WaveManager : MonoBehaviour
         var entityObj = GameObject.Find("Entity");
         GameObject enemyObj = Instantiate(enemyData.prefab, spawnPoint.position, spawnPoint.rotation, entityObj.transform);
         var aiDest = enemyObj.GetComponent<AIDestinationSetter>();
+
         aiDest.target = GameObject.Find("Station").transform;
         Enemy enemy = enemyObj.GetComponent<Enemy>();
     }

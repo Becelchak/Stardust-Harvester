@@ -1,30 +1,28 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
-public class BuildManager : MonoBehaviour
+public class BuildManager : MonoBehaviour, IGameSystem
 {
-    public static BuildManager Instance { get; private set; }
-
-    [Header("Настройки строительства")]
+    [Header("Settings")]
     [SerializeField] private GameObject buildPreviewPrefab;
     [SerializeField] private LayerMask buildGridLayer;
 
-    private IBuildable selectedBuildablePrefab;
-    private GameObject currentPreview;
-    private BuildCell hoveredCell;
+    private PlayerStationControl stationControl;
     private BuildGridGenerator currentGrid;
-
+    private IBuildable selectedBuildable;
+    private GameObject currentPreview;
     private List<IBuildable> activeBuildings = new List<IBuildable>();
 
-    void Awake()
+    public void Initialize(PlayerStationControl station)
     {
-        if (Instance != null && Instance != this)
+        if (station == null)
         {
-            Destroy(gameObject);
+            Debug.LogError("BuildManager: No station provided!");
             return;
         }
-        Instance = this;
+
+        stationControl = station;
+        Debug.Log("BuildManager initialized with station reference");
     }
 
     void Update()
@@ -33,9 +31,44 @@ public class BuildManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
             ClearSelection();
+    }
 
-        if (Input.GetMouseButtonDown(1))
-            ClearSelection();
+    public void SelectBuildable(IBuildable buildable)
+    {
+        selectedBuildable = buildable;
+
+        if (buildPreviewPrefab != null && selectedBuildable != null)
+        {
+            if (currentPreview != null)
+                Destroy(currentPreview);
+
+            currentPreview = Instantiate(buildPreviewPrefab);
+            currentPreview.SetActive(false);
+        }
+    }
+
+    void UpdateBuildPreview()
+    {
+        if (selectedBuildable == null || currentPreview == null) return;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, 100f, buildGridLayer))
+        {
+            BuildCell cell = hit.collider.GetComponent<BuildCell>();
+            if (cell != null && cell.IsBuildable && !cell.IsOccupied)
+            {
+                currentPreview.transform.position = cell.WorldPosition + Vector3.up * 0.5f;
+                currentPreview.SetActive(true);
+
+                if (Input.GetMouseButtonDown(0))
+                    TryBuildAtCell(cell);
+            }
+            else
+            {
+                currentPreview.SetActive(false);
+            }
+        }
     }
 
     public void RegisterBuilding(IBuildable buildable)
@@ -45,6 +78,46 @@ public class BuildManager : MonoBehaviour
             activeBuildings.Add(buildable);
 
             buildable.OnBuildDestroyed += OnSpecificWallDestroyed;
+        }
+    }
+
+    public void UnregisteredBuilding(IBuildable buildable)
+    {
+        if (!activeBuildings.Contains(buildable))
+        {
+            activeBuildings.Remove(buildable);
+
+            buildable.OnBuildDestroyed -= OnSpecificWallDestroyed;
+        }
+    }
+
+    void OnSpecificWallDestroyed(IBuildable buildable)
+    {
+        UnregisteredBuilding(buildable);
+    }
+
+
+    void TryBuildAtCell(BuildCell cell)
+    {
+        if (selectedBuildable == null || stationControl == null) return;
+
+        if (!stationControl.HasEnoughScrap(selectedBuildable.BuildCost))
+        {
+            Debug.Log("Not enough scrap!");
+            return;
+        }
+
+        if (!stationControl.TrySpendScrap(selectedBuildable.BuildCost))
+            return;
+
+        if (currentGrid != null)
+        {
+            IBuildable builtObject;
+            if (currentGrid.TryBuildAtCell(cell, selectedBuildable, out builtObject))
+            {
+                Debug.Log($"Built {((MonoBehaviour)builtObject).name}");
+                ClearSelection();
+            }
         }
     }
 
@@ -68,191 +141,12 @@ public class BuildManager : MonoBehaviour
         return nearest;
     }
 
-    public void UnregisterBuilding(IBuildable buildable)
-    {
-        if (activeBuildings.Contains(buildable))
-        {
-            activeBuildings.Remove(buildable);
-
-            buildable.OnBuildDestroyed -= OnSpecificWallDestroyed;
-        }
-    }
-
-    void OnSpecificWallDestroyed(IBuildable buildable)
-    {
-        UnregisterBuilding(buildable);
-    }
-
-    public void SelectBuildable(IBuildable buildablePrefab)
-    {
-        selectedBuildablePrefab = buildablePrefab;
-
-        if (buildPreviewPrefab != null && selectedBuildablePrefab != null)
-        {
-            if (currentPreview != null)
-                Destroy(currentPreview);
-
-            currentPreview = Instantiate(buildPreviewPrefab);
-            currentPreview.SetActive(false);
-
-            SetPreviewTransparency(currentPreview, 0.5f);
-        }
-
-        Debug.Log($"Выбрано для постройки: {((MonoBehaviour)selectedBuildablePrefab).name}");
-    }
-
-    void UpdateBuildPreview()
-    {
-        if (selectedBuildablePrefab == null || currentPreview == null) return;
-
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit, 100f, buildGridLayer))
-        {
-            BuildCell cell = hit.collider.GetComponent<BuildCell>();
-            if (cell != null && cell != hoveredCell)
-            {
-                OnCellHoverEnter(cell);
-            }
-
-            if (cell != null)
-            {
-                currentPreview.transform.position = cell.WorldPosition + Vector3.up * 0.5f;
-                currentPreview.SetActive(true);
-
-                UpdatePreviewColor(cell.IsBuildable && !cell.IsOccupied);
-            }
-            else
-            {
-                currentPreview.SetActive(false);
-            }
-        }
-        else
-        {
-            currentPreview.SetActive(false);
-            if (hoveredCell != null)
-                OnCellHoverExit(hoveredCell);
-        }
-
-
-        if (Input.GetMouseButtonDown(0) && hoveredCell != null)
-        {
-            TryBuildAtCell(hoveredCell);
-        }
-    }
-
-    public void OnCellHoverEnter(BuildCell cell)
-    {
-        hoveredCell = cell;
-
-    }
-
-    public void OnCellHoverExit(BuildCell cell)
-    {
-        if (hoveredCell == cell)
-            hoveredCell = null;
-    }
-
-    public void OnCellClicked(BuildCell cell)
-    {
-        if (selectedBuildablePrefab != null)
-        {
-            TryBuildAtCell(cell);
-        }
-        else
-        {
-            Debug.Log("Не выбран объект для строительства");
-        }
-    }
-
-    void TryBuildAtCell(BuildCell cell)
-    {
-        if (selectedBuildablePrefab == null || !cell.IsBuildable || cell.IsOccupied)
-            return;
-
-        if (!CanAffordBuild(selectedBuildablePrefab.BuildCost))
-        {
-            Debug.Log("Недостаточно ресурсов для постройки");
-            return;
-        }
-
-        if (currentGrid != null)
-        {
-            IBuildable builtObject;
-            if (currentGrid.TryBuildAtCell(cell, selectedBuildablePrefab, out builtObject))
-            {
-                SpendResources(selectedBuildablePrefab.BuildCost);
-
-                Debug.Log($"Построено: {((MonoBehaviour)builtObject).name} на клетке {cell.GridCoordinate}");
-                builtObject.OnBuild(cell);
-                Destroy(currentPreview);
-
-                ClearSelection();
-            }
-        }
-    }
-
     void ClearSelection()
     {
-        selectedBuildablePrefab = null;
-
+        selectedBuildable = null;
         if (currentPreview != null)
-        {
             Destroy(currentPreview);
-            currentPreview = null;
-        }
-
-        hoveredCell = null;
     }
 
-    void SetPreviewTransparency(GameObject preview, float alpha)
-    {
-        Renderer[] renderers = preview.GetComponentsInChildren<Renderer>();
-        foreach (Renderer renderer in renderers)
-        {
-            Material mat = renderer.material;
-            Color color = mat.color;
-            color.a = alpha;
-            mat.color = color;
-
-            mat.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
-            mat.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
-            mat.SetInt("_ZWrite", 0);
-            mat.DisableKeyword("_ALPHATEST_ON");
-            mat.EnableKeyword("_ALPHABLEND_ON");
-            mat.DisableKeyword("_ALPHAPREMULTIPLY_ON");
-            mat.renderQueue = 3000;
-        }
-    }
-
-    void UpdatePreviewColor(bool canBuild)
-    {
-        if (currentPreview == null) return;
-
-        Color previewColor = canBuild ? Color.green : Color.red;
-        previewColor.a = 0.5f;
-
-        Renderer[] renderers = currentPreview.GetComponentsInChildren<Renderer>();
-        foreach (Renderer renderer in renderers)
-        {
-            renderer.material.color = previewColor;
-        }
-    }
-
-    bool CanAffordBuild(int cost)
-    {
-        return true; // Временно всегда true
-    }
-
-    void SpendResources(int amount)
-    {
-        // Реализуйте списание ресурсов
-        Debug.Log($"Списано {amount} ресурсов");
-    }
-
-    public void RegisterGrid(BuildGridGenerator grid)
-    {
-        currentGrid = grid;
-    }
+    public void RegisterGrid(BuildGridGenerator grid) => currentGrid = grid;
 }
