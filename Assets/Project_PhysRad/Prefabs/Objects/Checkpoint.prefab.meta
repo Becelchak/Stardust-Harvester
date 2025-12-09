@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 441a7ea33d360da4bb28b341b600e33b
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 295898
+  packageName: 3D Arcade Shooter - Complete Game Template
+  packageVersion: 1.0
+  assetPath: Assets/Project_Shooter/Prefabs/Objects/Checkpoint.prefab
+  uploadId: 691639

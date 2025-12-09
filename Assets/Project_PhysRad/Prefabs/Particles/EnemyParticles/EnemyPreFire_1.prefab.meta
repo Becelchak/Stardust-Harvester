@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 39311bb9ce234df498f87ab6b78a55a9
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 295898
+  packageName: 3D Arcade Shooter - Complete Game Template
+  packageVersion: 1.0
+  assetPath: Assets/Project_Shooter/Prefabs/Particles/EnemyParticles/EnemyPreFire_1.prefab
+  uploadId: 691639

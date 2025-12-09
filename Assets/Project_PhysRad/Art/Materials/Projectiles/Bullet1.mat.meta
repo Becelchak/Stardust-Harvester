@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 911cd53c939a77a4d9c9381e4216bca0
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 295898
+  packageName: 3D Arcade Shooter - Complete Game Template
+  packageVersion: 1.0
+  assetPath: Assets/Project_Shooter/Art/Materials/Projectiles/Bullet1.mat
+  uploadId: 691639

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: e0c40eed073119b42941f5beefbd14da
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 295898
+  packageName: 3D Arcade Shooter - Complete Game Template
+  packageVersion: 1.0
+  assetPath: Assets/Project_Shooter/Prefabs/Objects/Crate_1.prefab
+  uploadId: 691639

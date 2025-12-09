@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: aede759cf6b0b13489019d335e90fc65
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 295898
+  packageName: 3D Arcade Shooter - Complete Game Template
+  packageVersion: 1.0
+  assetPath: Assets/Project_Shooter/Art/Animations/PlayerChar/Player_Menu.anim
+  uploadId: 691639

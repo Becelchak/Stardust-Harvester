@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 37d761dddaddf884485ae5fd8d69a5fb
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 295898
+  packageName: 3D Arcade Shooter - Complete Game Template
+  packageVersion: 1.0
+  assetPath: Assets/Project_Shooter/Art/Materials/Particles/Mat_Particle1.mat
+  uploadId: 691639

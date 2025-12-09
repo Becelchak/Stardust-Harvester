@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: e836b399a4f9c364a808babaa1a24026
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 295898
+  packageName: 3D Arcade Shooter - Complete Game Template
+  packageVersion: 1.0
+  assetPath: Assets/Project_Shooter/Prefabs/Projectiles/PlayerWeapons/Bullet 3.prefab
+  uploadId: 691639

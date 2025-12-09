@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 92f08d7430cca7544aa2a2f66d52ffec
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 295898
+  packageName: 3D Arcade Shooter - Complete Game Template
+  packageVersion: 1.0
+  assetPath: Assets/Project_Shooter/Prefabs/Pickups/Pickup_Power_Grenade.prefab
+  uploadId: 691639

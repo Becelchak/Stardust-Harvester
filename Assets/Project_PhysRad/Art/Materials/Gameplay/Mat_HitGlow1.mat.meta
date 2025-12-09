@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e714aa86ef13a924fa3d898552dc335c
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 295898
+  packageName: 3D Arcade Shooter - Complete Game Template
+  packageVersion: 1.0
+  assetPath: Assets/Project_Shooter/Art/Materials/Gameplay/Mat_HitGlow1.mat
+  uploadId: 691639

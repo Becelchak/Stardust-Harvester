@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 80bce051b57a3d04cb10aa215bf1eaa4
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 295898
+  packageName: 3D Arcade Shooter - Complete Game Template
+  packageVersion: 1.0
+  assetPath: Assets/Project_Shooter/ScriptableObjects/SaveData_Main.asset
+  uploadId: 691639

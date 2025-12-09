@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 385bd2fcde5f46f448539dc3e1b55a09
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 295898
+  packageName: 3D Arcade Shooter - Complete Game Template
+  packageVersion: 1.0
+  assetPath: Assets/Project_Shooter/Prefabs/Enemies/Enemy_Canon_1.prefab
+  uploadId: 691639

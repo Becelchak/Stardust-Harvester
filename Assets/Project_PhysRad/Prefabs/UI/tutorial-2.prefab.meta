@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: ebcc63cb7bbfb624e96de6e4840ee5a6
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 295898
+  packageName: 3D Arcade Shooter - Complete Game Template
+  packageVersion: 1.0
+  assetPath: Assets/Project_Shooter/Prefabs/UI/tutorial-2.prefab
+  uploadId: 691639

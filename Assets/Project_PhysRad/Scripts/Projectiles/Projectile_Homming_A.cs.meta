@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 7a8306a8dbfc15443873ac6569edae8d
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 295898
+  packageName: 3D Arcade Shooter - Complete Game Template
+  packageVersion: 1.0
+  assetPath: Assets/Project_Shooter/Scripts/Projectiles/Projectile_Homming_A.cs
+  uploadId: 691639

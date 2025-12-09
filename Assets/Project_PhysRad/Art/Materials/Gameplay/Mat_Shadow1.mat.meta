@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 543c96d880445f8469dae7add1dc072d
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 295898
+  packageName: 3D Arcade Shooter - Complete Game Template
+  packageVersion: 1.0
+  assetPath: Assets/Project_Shooter/Art/Materials/Gameplay/Mat_Shadow1.mat
+  uploadId: 691639

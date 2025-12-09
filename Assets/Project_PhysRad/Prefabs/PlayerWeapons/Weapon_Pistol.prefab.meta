@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: c0d9e94ebdb60d440b657b746b8354c3
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 295898
+  packageName: 3D Arcade Shooter - Complete Game Template
+  packageVersion: 1.0
+  assetPath: Assets/Project_Shooter/Prefabs/PlayerWeapons/Weapon_Pistol.prefab
+  uploadId: 691639

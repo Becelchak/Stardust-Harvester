@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: a844b6e85b2abec459feed6023051ed3
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 295898
+  packageName: 3D Arcade Shooter - Complete Game Template
+  packageVersion: 1.0
+  assetPath: Assets/Project_Shooter/Prefabs/Pickups/Pickup_WpnPower_1.prefab
+  uploadId: 691639

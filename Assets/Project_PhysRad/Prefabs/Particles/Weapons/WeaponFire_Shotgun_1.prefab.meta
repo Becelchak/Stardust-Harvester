@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 6482d0d3e53df334d8652124bc2a397e
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 295898
+  packageName: 3D Arcade Shooter - Complete Game Template
+  packageVersion: 1.0
+  assetPath: Assets/Project_Shooter/Prefabs/Particles/Weapons/WeaponFire_Shotgun_1.prefab
+  uploadId: 691639

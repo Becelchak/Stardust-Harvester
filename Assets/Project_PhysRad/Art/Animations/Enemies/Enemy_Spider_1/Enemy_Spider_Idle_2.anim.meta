@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 3fbfaa033dace81498210d3a869941c6
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 295898
+  packageName: 3D Arcade Shooter - Complete Game Template
+  packageVersion: 1.0
+  assetPath: Assets/Project_Shooter/Art/Animations/Enemies/Enemy_Spider_1/Enemy_Spider_Idle_2.anim
+  uploadId: 691639

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: a6f72db9c3a0cae4ab96ed77e765a594
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 295898
+  packageName: 3D Arcade Shooter - Complete Game Template
+  packageVersion: 1.0
+  assetPath: Assets/Project_Shooter/Prefabs/Objects/ShootSwitch_A.prefab
+  uploadId: 691639

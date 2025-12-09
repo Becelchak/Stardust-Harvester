@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: a9423b51fc84bce4ca5918c529d03c7c
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 295898
+  packageName: 3D Arcade Shooter - Complete Game Template
+  packageVersion: 1.0
+  assetPath: Assets/Project_Shooter/Prefabs/Triggers/Trigger_Event_1.prefab
+  uploadId: 691639

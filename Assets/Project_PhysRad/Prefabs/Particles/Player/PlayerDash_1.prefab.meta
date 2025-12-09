@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 9c0066c8b95fed9489086db9bd3719b2
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 295898
+  packageName: 3D Arcade Shooter - Complete Game Template
+  packageVersion: 1.0
+  assetPath: Assets/Project_Shooter/Prefabs/Particles/Player/PlayerDash_1.prefab
+  uploadId: 691639

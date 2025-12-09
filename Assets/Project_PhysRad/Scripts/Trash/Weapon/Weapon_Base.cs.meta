@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 1e00ab5f60177d74d87591c6a216e5c4
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 295898
+  packageName: 3D Arcade Shooter - Complete Game Template
+  packageVersion: 1.0
+  assetPath: Assets/Project_Shooter/Scripts/Weapon/Weapon_Base.cs
+  uploadId: 691639

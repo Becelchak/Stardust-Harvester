@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 1b530a539294ba54094f30fdb64074db
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 295898
+  packageName: 3D Arcade Shooter - Complete Game Template
+  packageVersion: 1.0
+  assetPath: Assets/Project_Shooter/Scripts/Weapon/PWeapon_Shotgun.cs
+  uploadId: 691639

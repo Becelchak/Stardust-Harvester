@@ -1,0 +1,14 @@
+{
+    "idSave": 8,
+    "isFirstSession": false,
+    "language": "ru",
+    "promptDone": false,
+    "money": 1,
+    "newPlayerName": "Hello!",
+    "openLevels": [
+        false,
+        true,
+        false
+    ],
+    "m_GemCount": 0
+}

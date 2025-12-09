@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 0df7a080c6ab83c4bb4ca81e6564c7dc
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 295898
+  packageName: 3D Arcade Shooter - Complete Game Template
+  packageVersion: 1.0
+  assetPath: Assets/Project_Shooter/Scripts/Player/PlayerChar.cs
+  uploadId: 691639

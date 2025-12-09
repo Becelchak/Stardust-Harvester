@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b751f1cd87503ed4e9d61c7bc2d42812
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 295898
+  packageName: 3D Arcade Shooter - Complete Game Template
+  packageVersion: 1.0
+  assetPath: Assets/Project_Shooter/Art/Materials/Gameplay/DirtFloor1.mat
+  uploadId: 691639

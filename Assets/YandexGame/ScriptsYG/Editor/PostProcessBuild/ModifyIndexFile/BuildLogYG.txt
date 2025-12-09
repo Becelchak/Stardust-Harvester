@@ -1,0 +1,2 @@
+Build path: /Users/denisov/3D-arcade-shooter-build
+Build number: 2

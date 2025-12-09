@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f56a98de67d91e14daf941aad4a10052
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 295898
+  packageName: 3D Arcade Shooter - Complete Game Template
+  packageVersion: 1.0
+  assetPath: Assets/Project_Shooter/Art/Materials/Gameplay/Colors1_Emissive.mat
+  uploadId: 691639

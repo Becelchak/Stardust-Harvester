@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 84505ed07161d5d4194da65a44d80043
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 295898
+  packageName: 3D Arcade Shooter - Complete Game Template
+  packageVersion: 1.0
+  assetPath: Assets/Project_Shooter/Prefabs/Projectiles/EnemyBullets/EnemyBullet_Homming_A.prefab
+  uploadId: 691639

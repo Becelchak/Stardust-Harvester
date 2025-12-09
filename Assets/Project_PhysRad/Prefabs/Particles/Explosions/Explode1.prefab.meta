@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 4487b5c831ed4f2459dfa20f330aab31
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 295898
+  packageName: 3D Arcade Shooter - Complete Game Template
+  packageVersion: 1.0
+  assetPath: Assets/Project_Shooter/Prefabs/Particles/Explosions/Explode1.prefab
+  uploadId: 691639

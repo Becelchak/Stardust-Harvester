@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: d03ef9edfebbed947a8278bf0bc9cdfa
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 295898
+  packageName: 3D Arcade Shooter - Complete Game Template
+  packageVersion: 1.0
+  assetPath: Assets/Project_Shooter/Prefabs/Geometry/Plant3.prefab
+  uploadId: 691639

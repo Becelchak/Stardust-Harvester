@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 1ceba55b22dc2f44e8b99503dff8ac72
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 295898
+  packageName: 3D Arcade Shooter - Complete Game Template
+  packageVersion: 1.0
+  assetPath: Assets/Project_Shooter/Prefabs/Geometry/Cliff2.prefab
+  uploadId: 691639

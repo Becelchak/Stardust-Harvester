@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55140790300e7ac47b239da9398aca24, type: 3}
+  m_Name: Enemy_1Data
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyData
+  enemyName: Enemy_1
+  maxHealth: 100
+  attackDamage: 10
+  attackRange: 0.8
+  attackRate: 1
+  movementSpeed: 3
+  scrapReward: 10
+  prefab: {fileID: 3646127026344434230, guid: 4699dcdac71cb0f4cb5b141c319cf21c, type: 3}

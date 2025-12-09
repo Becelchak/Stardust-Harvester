@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 3f3229ce4a91c534192021a981926c5d
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 295898
+  packageName: 3D Arcade Shooter - Complete Game Template
+  packageVersion: 1.0
+  assetPath: Assets/Project_Shooter/Prefabs/Particles/EnemyProjectiles/EnemyBulletHit1.prefab
+  uploadId: 691639

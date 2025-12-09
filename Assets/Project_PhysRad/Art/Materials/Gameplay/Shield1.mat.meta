@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a125490d5ff213840ae2f55b74fb6134
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 295898
+  packageName: 3D Arcade Shooter - Complete Game Template
+  packageVersion: 1.0
+  assetPath: Assets/Project_Shooter/Art/Materials/Gameplay/Shield1.mat
+  uploadId: 691639

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: f4dd74b1d2c71e14295f929a33ba2b1f
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 295898
+  packageName: 3D Arcade Shooter - Complete Game Template
+  packageVersion: 1.0
+  assetPath: Assets/Project_Shooter/Prefabs/Pickups/Powerup_Ring.prefab
+  uploadId: 691639

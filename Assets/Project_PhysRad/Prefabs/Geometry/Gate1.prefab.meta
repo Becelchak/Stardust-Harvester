@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 985607ba0bed4a048acebc42bc0b6909
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 295898
+  packageName: 3D Arcade Shooter - Complete Game Template
+  packageVersion: 1.0
+  assetPath: Assets/Project_Shooter/Prefabs/Geometry/Gate1.prefab
+  uploadId: 691639

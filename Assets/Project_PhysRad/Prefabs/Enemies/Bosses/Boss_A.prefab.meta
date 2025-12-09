@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: d83fa39a8b8e295418d1d822c8cac173
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 295898
+  packageName: 3D Arcade Shooter - Complete Game Template
+  packageVersion: 1.0
+  assetPath: Assets/Project_Shooter/Prefabs/Enemies/Bosses/Boss_A.prefab
+  uploadId: 691639

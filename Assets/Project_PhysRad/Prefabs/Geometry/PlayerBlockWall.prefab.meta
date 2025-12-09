@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: f46b34ae6a60bc34c9ebe4da208621c4
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 295898
+  packageName: 3D Arcade Shooter - Complete Game Template
+  packageVersion: 1.0
+  assetPath: Assets/Project_Shooter/Prefabs/Geometry/PlayerBlockWall.prefab
+  uploadId: 691639

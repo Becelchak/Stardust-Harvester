@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: bf69dbf720dd22f46b80d449b7c465a0
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 295898
+  packageName: 3D Arcade Shooter - Complete Game Template
+  packageVersion: 1.0
+  assetPath: Assets/Project_Shooter/Prefabs/Pickups/Pickup_Pistol_1.prefab
+  uploadId: 691639

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 0b5817c6833b4234cab4c029dc70eea6
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 295898
+  packageName: 3D Arcade Shooter - Complete Game Template
+  packageVersion: 1.0
+  assetPath: Assets/Project_Shooter/Prefabs/Enemies/enm_Spider_1.prefab
+  uploadId: 691639

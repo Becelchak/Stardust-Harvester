@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 972aa28effd6b6f4e903db6ce2dac4be
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 295898
+  packageName: 3D Arcade Shooter - Complete Game Template
+  packageVersion: 1.0
+  assetPath: Assets/Project_Shooter/Prefabs/Geometry/Rock.prefab
+  uploadId: 691639

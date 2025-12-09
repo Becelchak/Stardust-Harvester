@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 8aff25ddeb9733a45bd6af58456ea4ac
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 295898
+  packageName: 3D Arcade Shooter - Complete Game Template
+  packageVersion: 1.0
+  assetPath: Assets/Project_Shooter/Art/Materials/PhysicMaterial/Pickup.physicMaterial
+  uploadId: 691639

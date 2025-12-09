@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: ba8faf4d6cfa0e2439ba2ff9935ef7a8
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 295898
+  packageName: 3D Arcade Shooter - Complete Game Template
+  packageVersion: 1.0
+  assetPath: Assets/Project_Shooter/Prefabs/Particles/Gameplay/PlayerHit_1.prefab
+  uploadId: 691639

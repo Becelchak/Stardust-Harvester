@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 77408b01b46a2cf46bd9939f522d34ed
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 295898
+  packageName: 3D Arcade Shooter - Complete Game Template
+  packageVersion: 1.0
+  assetPath: Assets/Project_Shooter/Prefabs/Particles/Gameplay/Repair_1.prefab
+  uploadId: 691639

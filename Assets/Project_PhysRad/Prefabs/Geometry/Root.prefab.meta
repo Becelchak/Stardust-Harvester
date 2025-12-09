@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: b310f683f04feb34eb67d58c6630458d
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 295898
+  packageName: 3D Arcade Shooter - Complete Game Template
+  packageVersion: 1.0
+  assetPath: Assets/Project_Shooter/Prefabs/Geometry/Root.prefab
+  uploadId: 691639

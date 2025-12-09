@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d9bacdef424f346499ca0b554a42e36a
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 295898
+  packageName: 3D Arcade Shooter - Complete Game Template
+  packageVersion: 1.0
+  assetPath: Assets/Project_Shooter/Art/Animations/Enemies/Enemy_Solider_1/Base.controller
+  uploadId: 691639

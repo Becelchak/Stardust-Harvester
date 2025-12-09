@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 1d09bbf7efa45c448aba57e070b5f04c
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 295898
+  packageName: 3D Arcade Shooter - Complete Game Template
+  packageVersion: 1.0
+  assetPath: Assets/Project_Shooter/Art/Animations/PlayerChar/PlayerChar_Idle_1.anim
+  uploadId: 691639
