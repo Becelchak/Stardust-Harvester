@@ -854,7 +854,11 @@ Transform:
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   m_ConstrainProportionsScale: 0
+=======
+  m_ConstrainProportionsScale: 1
+>>>>>>> Stashed changes
 =======
   m_ConstrainProportionsScale: 1
 >>>>>>> Stashed changes
