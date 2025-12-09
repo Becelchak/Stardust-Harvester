@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class BuildManager : MonoBehaviour
 {
@@ -12,6 +14,8 @@ public class BuildManager : MonoBehaviour
     private GameObject currentPreview;
     private BuildCell hoveredCell;
     private BuildGridGenerator currentGrid;
+
+    private List<IBuildable> activeBuildings = new List<IBuildable>();
 
     void Awake()
     {
@@ -32,6 +36,51 @@ public class BuildManager : MonoBehaviour
 
         if (Input.GetMouseButtonDown(1))
             ClearSelection();
+    }
+
+    public void RegisterBuilding(IBuildable buildable)
+    {
+        if (!activeBuildings.Contains(buildable))
+        {
+            activeBuildings.Add(buildable);
+
+            buildable.OnBuildDestroyed += OnSpecificWallDestroyed;
+        }
+    }
+
+    public IBuildable GetNearestBuilding(Vector3 position, float maxRange = float.MaxValue)
+    {
+        IBuildable nearest = null;
+        float nearestDistance = float.MaxValue;
+
+        foreach (var building in activeBuildings)
+        {
+            if (building == null) continue;
+
+            float distance = Vector3.Distance(position, ((MonoBehaviour)building).transform.position);
+            if (distance <= maxRange && distance < nearestDistance)
+            {
+                nearestDistance = distance;
+                nearest = building;
+            }
+        }
+
+        return nearest;
+    }
+
+    public void UnregisterBuilding(IBuildable buildable)
+    {
+        if (activeBuildings.Contains(buildable))
+        {
+            activeBuildings.Remove(buildable);
+
+            buildable.OnBuildDestroyed -= OnSpecificWallDestroyed;
+        }
+    }
+
+    void OnSpecificWallDestroyed(IBuildable buildable)
+    {
+        UnregisterBuilding(buildable);
     }
 
     public void SelectBuildable(IBuildable buildablePrefab)
@@ -136,6 +185,8 @@ public class BuildManager : MonoBehaviour
                 SpendResources(selectedBuildablePrefab.BuildCost);
 
                 Debug.Log($"Построено: {((MonoBehaviour)builtObject).name} на клетке {cell.GridCoordinate}");
+                builtObject.OnBuild(cell);
+                Destroy(currentPreview);
 
                 ClearSelection();
             }
@@ -191,7 +242,6 @@ public class BuildManager : MonoBehaviour
 
     bool CanAffordBuild(int cost)
     {
-        // Реализуйте проверку ресурсов игрока
         return true; // Временно всегда true
     }
 

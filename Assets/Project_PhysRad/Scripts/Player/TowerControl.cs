@@ -1,6 +1,5 @@
 using Shooter.Gameplay;
 using System.Collections;
-using TMPro;
 using UnityEngine;
 
 public class TowerControl : MonoBehaviour
@@ -19,7 +18,7 @@ public class TowerControl : MonoBehaviour
     [SerializeField] private string targetTag = "Enemy";
 
     private IDamageable currentTarget;
-    private GameObject currentTargetGameObj;
+    private Transform currentTargetTransform;
     private float lastAttackTime;
     private bool isActive = true;
 
@@ -28,12 +27,20 @@ public class TowerControl : MonoBehaviour
         if (firePoint == null)
             firePoint = transform;
 
+        Enemy.OnEnemyDied += OnEnemyDied;
+
         StartCoroutine(ScanForTargets());
     }
 
     private void Update()
     {
         if (!isActive || currentTarget == null) return;
+
+        if (!IsTargetValid(currentTarget))
+        {
+            ClearTarget();
+            return;
+        }
 
         if (!currentTarget.IsAlive || !IsTargetInRange(currentTarget))
         {
@@ -48,6 +55,18 @@ public class TowerControl : MonoBehaviour
         }
     }
 
+    private bool IsTargetValid(IDamageable target)
+    {
+        if (target == null) return false;
+
+        if (!target.IsAlive) return false;
+
+        MonoBehaviour targetMono = target as MonoBehaviour;
+        if (targetMono == null || targetMono.transform == null) return false;
+
+        return IsTargetInRange(target);
+    }
+
     private IEnumerator ScanForTargets()
     {
         while (isActive)
@@ -56,7 +75,7 @@ public class TowerControl : MonoBehaviour
             {
                 FindNearestTarget();
             }
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(0.1f);
         }
     }
 
@@ -69,6 +88,7 @@ public class TowerControl : MonoBehaviour
         );
 
         IDamageable nearestTarget = null;
+        Transform nearestTransform = null;
         float nearestDistance = float.MaxValue;
 
         foreach (Collider collider in colliders)
@@ -76,7 +96,7 @@ public class TowerControl : MonoBehaviour
             if (!collider.CompareTag(targetTag)) continue;
 
             IDamageable potentialTarget = collider.GetComponent<IDamageable>();
-            currentTargetGameObj = collider.gameObject;
+            currentTargetTransform = collider.gameObject.transform;
             if (potentialTarget == null || !potentialTarget.IsAlive) continue;
 
             float distance = Vector3.Distance(transform.position, collider.transform.position);
@@ -84,10 +104,12 @@ public class TowerControl : MonoBehaviour
             {
                 nearestDistance = distance;
                 nearestTarget = potentialTarget;
+                nearestTransform = collider.transform;
             }
         }
 
         currentTarget = nearestTarget;
+        currentTargetTransform = nearestTransform;
     }
 
     private bool IsTargetInRange(IDamageable target)
@@ -103,6 +125,22 @@ public class TowerControl : MonoBehaviour
         return distance <= attackRange;
     }
 
+    private void OnEnemyDied(Enemy deadEnemy)
+    {
+        if (currentTargetTransform != null && deadEnemy.transform == currentTargetTransform)
+        {
+            ClearTarget();
+
+            StopCoroutine(nameof(ScanForTargets));
+            StartCoroutine(ScanForTargets());
+        }
+    }
+
+    private void ClearTarget()
+    {
+        currentTarget = null;
+        currentTargetTransform = null;
+    }
 
     private void AttackTarget(IDamageable target)
     {
@@ -114,7 +152,7 @@ public class TowerControl : MonoBehaviour
         );
 
         var projectale = projectile.GetComponent<Projectile_Base>();
-        projectale.Initialize(currentTargetGameObj.transform.position, firePoint.position);
+        projectale.Initialize(currentTargetTransform.transform.position, firePoint.position);
 
         Debug.Log($"Башня выстрелила по цели");
     }

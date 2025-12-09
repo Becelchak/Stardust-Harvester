@@ -1,4 +1,5 @@
 ﻿using Pathfinding;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Resources;
@@ -8,7 +9,7 @@ namespace Shooter.Gameplay
 {
     public class Enemy : MonoBehaviour, IAttacker, IDamageable, ITarget
     {
-        protected DamageControl m_DamageControl;
+
         [SerializeField]
         protected GameObject m_DeathParticlePrefab;
         [SerializeField]
@@ -17,7 +18,9 @@ namespace Shooter.Gameplay
 
         private IAstarAI aiAgent;
         private IDamageable targetToAttack;
+        private Transform currentTargetTransform;
         private float lastAttackTime;
+        private bool canSwitchTarget = true;
 
         public int AttackDamage => data.attackDamage;
         public float AttackRange => data.attackRange;
@@ -30,7 +33,11 @@ namespace Shooter.Gameplay
         }
         public int MaxHealth => data.maxHealth;
 
-        public Transform targetCenter => transform;
+        public Transform enemyCenter => transform;
+
+        public static event Action<Enemy> OnEnemyDied;
+        public event Action<Enemy> OnThisEnemyDied;
+        public event Action<Enemy, IDamageable> OnTargetChanged;
 
 
         public int currentHealth;
@@ -43,14 +50,7 @@ namespace Shooter.Gameplay
 
             currentHealth = data.maxHealth;
             aiAgent = GetComponent<IAstarAI>();
-            GameObject stationObj = GameObject.FindGameObjectWithTag("Station");
-            if (stationObj != null)
-            {
-                targetToAttack = stationObj.GetComponent<IDamageable>();
-
-                if (aiAgent != null)
-                    aiAgent.destination = stationObj.transform.position;
-            }
+            FindStation();
 
         }
 
@@ -59,7 +59,9 @@ namespace Shooter.Gameplay
 
             if (!IsAlive || targetToAttack == null) return;
 
-            float distanceToTarget = Vector3.Distance(transform.position, ((MonoBehaviour)targetToAttack).transform.position);
+            float distanceToTarget = Vector3.Distance(transform.position, (currentTargetTransform.position));
+            if(distanceToTarget > 45)
+                Die();
             if (distanceToTarget <= data.attackRange)
             {
                 if (aiAgent != null)
@@ -70,11 +72,18 @@ namespace Shooter.Gameplay
                     Attack(targetToAttack);
                     lastAttackTime = Time.time;
                 }
+                canSwitchTarget = false;
             }
             else
             {
                 if (aiAgent != null)
                     aiAgent.isStopped = false;
+                canSwitchTarget = true;
+            }
+
+            if (canSwitchTarget)
+            {
+                FindNewTarget();
             }
         }
 
@@ -87,7 +96,7 @@ namespace Shooter.Gameplay
             if (target != null)
             {
                 target.TakeDamage(data.attackDamage);
-                Debug.Log($"Атакую станцию! У нее осталось {target.CurrentHealth}");
+                Debug.Log($"Атакую! У цели осталось {target.CurrentHealth}");
             }
         }
 
@@ -107,12 +116,93 @@ namespace Shooter.Gameplay
 
         public void Die()
         {
+            OnEnemyDied?.Invoke(this);
+            OnThisEnemyDied?.Invoke(this);
+
             PlayerManager.Instance?.AddScrap(data.scrapReward);
 
             if (aiAgent != null)
                 aiAgent.isStopped = true;
 
+            if (m_DeathParticlePrefab != null)
+            {
+                GameObject deathParticles = Instantiate(
+                    m_DeathParticlePrefab,
+                    transform.position,
+                    Quaternion.identity
+                );
+                Destroy(deathParticles, 2f);
+            }
+
+            OnThisEnemyDied = null;
+
             Destroy(gameObject, 0.1f);
+        }
+
+        void OnDestroy()
+        {
+            OnThisEnemyDied = null;
+        }
+
+        void FindNewTarget()
+        {
+
+            IBuildable nearestBuild = BuildManager.Instance?.GetNearestBuilding(transform.position, data.attackRange * 2f);
+            if (nearestBuild != null)
+            {
+                var damageblaBuild = ((MonoBehaviour)nearestBuild).GetComponent<IDamageable>();
+                if (damageblaBuild != null)
+                {
+                    SetTarget(damageblaBuild, ((MonoBehaviour)nearestBuild).transform);
+                }
+                return;
+            }
+
+            FindStation();
+        }
+
+        void SetTarget(IDamageable newTarget, Transform newTargetTransform)
+        {
+            if (newTarget == targetToAttack) return;
+
+            IDamageable oldTarget = targetToAttack;
+            targetToAttack = newTarget;
+            currentTargetTransform = newTargetTransform;
+
+            if (aiAgent != null && currentTargetTransform != null)
+            {
+                aiAgent.destination = currentTargetTransform.position;
+                aiAgent.SearchPath();
+            }
+
+            OnTargetChanged?.Invoke(this, oldTarget);
+
+            Debug.Log($"Враг сменил цель на: {(newTarget as MonoBehaviour)?.name}");
+        }
+
+        public void OnCollisionEnter(Collision collision)
+        {
+            if (collision.transform.tag == "Build")
+            {
+                var damageBuild = collision.gameObject.GetComponent<IDamageable>();
+                if (damageBuild == null) return;
+
+                targetToAttack = damageBuild;
+            }
+                
+        }
+
+        public void FindStation()
+        {
+            GameObject stationObj = GameObject.FindGameObjectWithTag("Station");
+            if (stationObj != null)
+            {
+                targetToAttack = stationObj.GetComponent<IDamageable>();
+
+                if (aiAgent != null)
+                    aiAgent.destination = stationObj.transform.position;
+            }
+            currentTargetTransform = ((MonoBehaviour)targetToAttack).transform;
         }
     }
 

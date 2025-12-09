@@ -15,7 +15,7 @@ MonoBehaviour:
   enemyName: Enemy_1
   maxHealth: 100
   attackDamage: 10
-  attackRange: 0.8
+  attackRange: 2
   attackRate: 1
   movementSpeed: 3
   scrapReward: 10

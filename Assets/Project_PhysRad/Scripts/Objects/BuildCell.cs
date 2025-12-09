@@ -1,78 +1,71 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UIElements;
 
+[RequireComponent(typeof(BoxCollider))] // Обязательно!
+[RequireComponent(typeof(MeshRenderer))] // Для отображения
 public class BuildCell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     [Header("Визуальные настройки")]
-    [SerializeField] private MeshRenderer cellRenderer;
+    [SerializeField] private Material defaultMaterial;
     [SerializeField] private Material hoverMaterial;
+    [SerializeField] private Material blockedMaterial;
+    [SerializeField] private Material occupiedMaterial;
 
     private BuildGridGenerator gridGenerator;
     private Vector2Int gridCoordinate;
-    private Vector3 worldPosition;
     private bool isBuildable = true;
     private bool isOccupied = false;
     private IBuildable currentBuildable;
-    private Material defaultMaterial;
+    private MeshRenderer meshRenderer;
 
     public Vector2Int GridCoordinate => gridCoordinate;
-    public Vector3 WorldPosition => worldPosition;
-    public bool IsBuildable => isBuildable;
+    public Vector3 WorldPosition => transform.position;
+    public bool IsBuildable => isBuildable && !isOccupied;
     public bool IsOccupied => isOccupied;
     public IBuildable CurrentBuildable => currentBuildable;
 
-    public void Initialize(BuildGridGenerator generator, Vector2Int coord, Vector3 position, bool buildable)
+    void Awake()
+    {
+        meshRenderer = GetComponent<MeshRenderer>();
+        if (meshRenderer == null)
+        {
+            Debug.LogError($"BuildCell {name}: нет MeshRenderer!");
+        }
+    }
+
+    public void Initialize(BuildGridGenerator generator, Vector2Int coord, bool buildable)
     {
         gridGenerator = generator;
         gridCoordinate = coord;
-        worldPosition = position;
         isBuildable = buildable;
 
-        if (cellRenderer != null)
-            defaultMaterial = cellRenderer.material;
+        SetMaterial(buildable ? defaultMaterial : blockedMaterial);
 
-        if (!buildable)
-        {
-            Collider collider = GetComponent<Collider>();
-            if (collider != null) collider.enabled = false;
-        }
+        SetupCollider();
+    }
+
+    private void SetupCollider()
+    {
+        BoxCollider collider = GetComponent<BoxCollider>();
+        if (collider == null) collider = gameObject.AddComponent<BoxCollider>();
+
+        collider.isTrigger = false;
+        collider.size = new Vector3(1, 0.1f, 1);
+
+        collider.enabled = isBuildable;
     }
 
     public void SetMaterial(Material material)
     {
-        if (cellRenderer != null)
-        {
-            cellRenderer.material = material;
-            defaultMaterial = material;
-        }
-    }
-
-    public void SetOccupied(IBuildable buildable, Material occupiedMaterial = null)
-    {
-        isOccupied = true;
-        currentBuildable = buildable;
-
-        if (occupiedMaterial != null && cellRenderer != null)
-            cellRenderer.material = occupiedMaterial;
-    }
-
-    public void ClearOccupation()
-    {
-        isOccupied = false;
-        currentBuildable = null;
-
-        if (cellRenderer != null && defaultMaterial != null)
-            cellRenderer.material = defaultMaterial;
+        if (meshRenderer != null && material != null)
+            meshRenderer.material = material;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (!isBuildable || isOccupied) return;
 
-        if (cellRenderer != null && hoverMaterial != null)
-            cellRenderer.material = hoverMaterial;
-
+        SetMaterial(hoverMaterial);
         BuildManager.Instance?.OnCellHoverEnter(this);
     }
 
@@ -80,9 +73,7 @@ public class BuildCell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     {
         if (!isBuildable || isOccupied) return;
 
-        if (cellRenderer != null && defaultMaterial != null)
-            cellRenderer.material = defaultMaterial;
-
+        SetMaterial(defaultMaterial);
         BuildManager.Instance?.OnCellHoverExit(this);
     }
 
@@ -91,5 +82,32 @@ public class BuildCell : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         if (!isBuildable || isOccupied) return;
 
         BuildManager.Instance?.OnCellClicked(this);
+        Debug.Log($"Клик по клетке {gridCoordinate}");
+    }
+
+    public void SetOccupied(IBuildable buildable)
+    {
+        isOccupied = true;
+        currentBuildable = buildable;
+        SetMaterial(occupiedMaterial);
+
+        BoxCollider collider = GetComponent<BoxCollider>();
+        if (collider != null) collider.enabled = false;
+    }
+
+    public void ClearOccupation()
+    {
+        isOccupied = false;
+        currentBuildable = null;
+        SetMaterial(defaultMaterial);
+
+        BoxCollider collider = GetComponent<BoxCollider>();
+        if (collider != null) collider.enabled = true;
+    }
+
+    public void SetHovered(bool isHovered)
+    {
+        if (!isBuildable || isOccupied) return;
+        SetMaterial(isHovered ? hoverMaterial : defaultMaterial);
     }
 }

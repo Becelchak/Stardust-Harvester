@@ -5,15 +5,15 @@ public class BuildGridGenerator : MonoBehaviour
 {
     [Header("Настройки сетки")]
     [SerializeField] private Transform gridCenter;
-    [SerializeField] private int gridSize = 10;
+    [SerializeField] private int gridSize = 20;
     [SerializeField] private float cellSize = 1.5f;
     [SerializeField] private LayerMask obstacleLayer;
     [SerializeField] private GameObject cellPrefab;
 
-    [Header("Визуальные настройки")]
+    [Header("Материалы")]
     [SerializeField] private Material freeCellMaterial;
-    [SerializeField] private Material occupiedCellMaterial;
     [SerializeField] private Material blockedCellMaterial;
+    [SerializeField] private Material occupiedCellMaterial;
 
     private Dictionary<Vector2Int, BuildCell> gridCells = new Dictionary<Vector2Int, BuildCell>();
     private Dictionary<IBuildable, BuildCell> buildables = new Dictionary<IBuildable, BuildCell>();
@@ -21,13 +21,20 @@ public class BuildGridGenerator : MonoBehaviour
     void Start()
     {
         GenerateGrid();
+        BuildManager.Instance?.RegisterGrid(this);
     }
 
     void GenerateGrid()
     {
-        if (cellPrefab == null || gridCenter == null)
+        if (cellPrefab == null)
         {
-            Debug.LogError("BuildGridGenerator: Не назначены префаб клетки или центр сетки!");
+            Debug.LogError("BuildGridGenerator: Не назначен префаб клетки!");
+            return;
+        }
+
+        if (!cellPrefab.GetComponent<BuildCell>())
+        {
+            Debug.LogError($"BuildGridGenerator: Префаб {cellPrefab.name} не содержит компонент BuildCell!");
             return;
         }
 
@@ -38,68 +45,37 @@ public class BuildGridGenerator : MonoBehaviour
             for (int z = -halfSize; z <= halfSize; z++)
             {
                 Vector3 worldPosition = gridCenter.position +
-                    new Vector3(x * cellSize, 1f, z * cellSize);
+                    new Vector3(x * cellSize, 0.001f, z * cellSize);
 
-                bool isBlocked = Physics.CheckSphere(
+                bool isBlocked = Physics.CheckBox(
                     worldPosition,
-                    cellSize * 0.4f,
+                    new Vector3(cellSize * 0.45f, 0.05f, cellSize * 0.45f),
+                    Quaternion.identity,
                     obstacleLayer
                 );
 
                 Vector2Int gridCoord = new Vector2Int(x + halfSize, z + halfSize);
 
-                GameObject cellObj = Instantiate(
-                    cellPrefab,
-                    worldPosition,
-                    Quaternion.identity,
-                    transform
-                );
-
+                GameObject cellObj = Instantiate(cellPrefab, worldPosition, Quaternion.identity, transform);
                 cellObj.name = $"Cell_{gridCoord.x}_{gridCoord.y}";
 
                 BuildCell cell = cellObj.GetComponent<BuildCell>();
-                if (cell == null) cell = cellObj.AddComponent<BuildCell>();
 
-                cell.Initialize(this, gridCoord, worldPosition, !isBlocked);
+                Material startMaterial = isBlocked ? blockedCellMaterial : freeCellMaterial;
+                cell.SetMaterial(startMaterial);
 
-                cell.SetMaterial(isBlocked ? blockedCellMaterial : freeCellMaterial);
+                cell.Initialize(this, gridCoord, !isBlocked);
 
                 gridCells[gridCoord] = cell;
+
+                if (isBlocked)
+                    cellObj.GetComponent<Renderer>().material.color = Color.red * 0.3f;
+                else
+                    cellObj.GetComponent<Renderer>().material.color = Color.green * 0.3f;
             }
         }
 
         Debug.Log($"Сетка построена: {gridCells.Count} клеток");
-    }
-
-    public bool TryBuildAtCell(BuildCell cell, IBuildable buildablePrefab, out IBuildable builtObject)
-    {
-        builtObject = null;
-
-        if (cell == null || !cell.IsBuildable || cell.IsOccupied)
-            return false;
-
-        GameObject builtObj = Instantiate(
-            (buildablePrefab as MonoBehaviour).gameObject,
-            cell.WorldPosition + Vector3.up * 0.5f,
-            Quaternion.identity
-        );
-
-        UpdateGridAroundPosition(cell.transform.position, 1);
-
-        IBuildable buildable = builtObj.GetComponent<IBuildable>();
-        if (buildable == null)
-        {
-            Destroy(builtObj);
-            return false;
-        }
-
-        cell.SetOccupied(buildable, occupiedCellMaterial);
-        buildables[buildable] = cell;
-
-        buildable.OnBuild(cell);
-
-        builtObject = buildable;
-        return true;
     }
 
     public bool TryRemoveBuildable(IBuildable buildable)
@@ -114,54 +90,43 @@ public class BuildGridGenerator : MonoBehaviour
         return true;
     }
 
-    public BuildCell GetCellAtPosition(Vector3 worldPosition)
+    public bool TryBuildAtCell(BuildCell cell, IBuildable buildablePrefab, out IBuildable builtObject)
     {
-        Vector3 localPos = worldPosition - gridCenter.position;
-        int x = Mathf.RoundToInt(localPos.x / cellSize) + gridSize / 2;
-        int z = Mathf.RoundToInt(localPos.z / cellSize) + gridSize / 2;
+        builtObject = null;
 
-        Vector2Int coord = new Vector2Int(x, z);
-        return gridCells.ContainsKey(coord) ? gridCells[coord] : null;
-    }
-
-    void OnDrawGizmosSelected()
-    {
-        if (gridCenter == null) return;
-
-        Gizmos.color = new Color(0, 1, 0, 0.3f);
-        float halfCell = cellSize * 0.5f;
-        int halfSize = gridSize / 2;
-
-        for (int x = -halfSize; x <= halfSize; x++)
+        if (cell == null || !cell.IsBuildable || cell.IsOccupied)
         {
-            for (int z = -halfSize; z <= halfSize; z++)
-            {
-                Vector3 center = gridCenter.position +
-                    new Vector3(x * cellSize, 0.1f, z * cellSize);
-
-                Gizmos.DrawWireCube(center, new Vector3(cellSize, 0.1f, cellSize));
-            }
+            Debug.Log($"Клетка недоступна для строительства: {cell?.GridCoordinate}");
+            return false;
         }
-    }
 
-    public void UpdateGridAroundPosition(Vector3 position, float radius)
-    {
-        int halfSize = gridSize / 2;
-
-        foreach (var cell in gridCells.Values)
+        MonoBehaviour buildableMono = buildablePrefab as MonoBehaviour;
+        if (buildableMono == null)
         {
-            float distance = Vector3.Distance(cell.WorldPosition, position);
-            if (distance <= radius)
-            {
-                bool isBlocked = Physics.CheckSphere(
-                    cell.WorldPosition,
-                    cellSize * 0.4f,
-                    obstacleLayer
-                );
-
-                cell.SetMaterial(isBlocked ? blockedCellMaterial :
-                    cell.IsOccupied ? occupiedCellMaterial : freeCellMaterial);
-            }
+            Debug.LogError("BuildablePrefab не является MonoBehaviour!");
+            return false;
         }
+
+        GameObject builtObj = Instantiate(
+            buildableMono.gameObject,
+            cell.WorldPosition + Vector3.up * 0.5f,
+            Quaternion.identity
+        );
+
+        IBuildable buildable = builtObj.GetComponent<IBuildable>();
+        if (buildable == null)
+        {
+            Debug.LogError("Построенный объект не имеет IBuildable!");
+            Destroy(builtObj);
+            return false;
+        }
+
+        cell.SetOccupied(buildable);
+        builtObject = buildable;
+
+        buildables.Add(builtObject, cell); 
+
+        Debug.Log($"Построено на клетке {cell.GridCoordinate}");
+        return true;
     }
 }

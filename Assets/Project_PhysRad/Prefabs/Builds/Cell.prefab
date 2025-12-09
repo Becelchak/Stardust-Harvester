@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 851230944914868879}
   - component: {fileID: 700255669403668529}
   - component: {fileID: 3524235001238212975}
+  - component: {fileID: 2517164199342240152}
   m_Layer: 0
   m_Name: Cell
   m_TagString: Untagged
@@ -68,7 +69,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4cb33a57f31069d4e94541c918d05c39, type: 2}
+  - {fileID: 239378781582670930, guid: e5ca7e88d77ea14458dfa2cbabdd5a7b, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -125,5 +126,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0867cf80db29434b8ff6add72b1650d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BuildCell
-  cellRenderer: {fileID: 851230944914868879}
+  defaultMaterial: {fileID: 239378781582670930, guid: e5ca7e88d77ea14458dfa2cbabdd5a7b,
+    type: 3}
   hoverMaterial: {fileID: 2100000, guid: 3219de2d574674beb889c87b844502b5, type: 2}
+  blockedMaterial: {fileID: -3661639628750336703, guid: 36d9a07c6faaaee46a7932a8a4aa4098,
+    type: 3}
+  occupiedMaterial: {fileID: 2100000, guid: 97906b48ad77d284a846ff19eacc0ba5, type: 2}
+--- !u!65 &2517164199342240152
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2317604782728491095}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}

@@ -1,3 +1,5 @@
+using System;
+
 public interface IBuildable
 {
     /// <summary>Вызывается при размещении объекта на клетке</summary>
@@ -14,4 +16,9 @@ public interface IBuildable
 
     /// <summary>Ссылка на клетку, на которой построен</summary>
     BuildCell BuildCell { get; set; }
+
+
+    event Action<Wall> OnBuildDamaged;
+    event Action<Wall> OnBuildDestroyed;
+    static event Action<Wall> OnAnyBuildDestroyed;
 }

@@ -6,7 +6,6 @@ using static UnityEngine.GraphicsBuffer;
 public class PlayerStationControl : MonoBehaviour, IDamageable
 {
     [SerializeField] private StationData data;
-    [SerializeField] private Transform weaponPivot;
 
     private int currentHealth;
     private int currentScrap;
