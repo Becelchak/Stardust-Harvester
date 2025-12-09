@@ -5,7 +5,7 @@ public class UIManager : MonoBehaviour
 {
     [Header("UI Elements")]
     [SerializeField] private Text scrapText;
-    [SerializeField] private Slider healthSlider;
+    [SerializeField] private Image healthSlider;
     [SerializeField] private Text healthText;
     [SerializeField] private GameObject lowHealthWarning;
 
@@ -39,8 +39,7 @@ public class UIManager : MonoBehaviour
 
         if (healthSlider != null)
         {
-            healthSlider.maxValue = stationControl.MaxHealth;
-            healthSlider.value = stationControl.CurrentHealth;
+            healthSlider.fillAmount = Mathf.Clamp01((float)stationControl.CurrentHealth / stationControl.MaxHealth);
         }
 
         if (healthText != null)

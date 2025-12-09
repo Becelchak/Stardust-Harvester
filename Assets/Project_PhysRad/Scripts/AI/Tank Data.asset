@@ -15,7 +15,7 @@ MonoBehaviour:
   enemyName: Tank
   maxHealth: 100
   attackDamage: 80
-  attackRange: 1.5
+  attackRange: 2
   attackRate: 3
   movementSpeed: 1
   scrapReward: 500

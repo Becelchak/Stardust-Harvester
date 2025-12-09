@@ -15,7 +15,7 @@ MonoBehaviour:
   enemyName: Sprinter
   maxHealth: 40
   attackDamage: 30
-  attackRange: 1.5
+  attackRange: 2
   attackRate: 1
   movementSpeed: 8
   scrapReward: 200
