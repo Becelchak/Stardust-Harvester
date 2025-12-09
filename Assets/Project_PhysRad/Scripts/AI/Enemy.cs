@@ -56,10 +56,6 @@ namespace Shooter.Gameplay
 
         void Update()
         {
-            //Vector3 forward = Vector3.zero - transform.position;
-            //forward.y = 0;
-            //Quaternion rotation = Quaternion.LookRotation(forward);
-            //transform.rotation = Quaternion.Lerp(transform.rotation, rotation, 10 * Time.deltaTime);
 
             if (!IsAlive || targetToAttack == null) return;
 
