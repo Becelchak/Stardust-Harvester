@@ -1,6 +1,7 @@
 ﻿using Pathfinding;
 using System;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class Enemy : MonoBehaviour, IAttacker, IDamageable, ITarget
 {
@@ -10,6 +11,10 @@ public class Enemy : MonoBehaviour, IAttacker, IDamageable, ITarget
     [SerializeField]
     protected GameObject m_SpawnParticlePrefab;
     [SerializeField] protected EnemyData data;
+    [SerializeField] protected AudioClip attackSound => data.attackSound;
+    [SerializeField] protected AudioClip spawnSound => data.spawnSound;
+    [SerializeField] protected AudioClip deathSound => data.deathSound;
+    private AudioSource audioSource;
 
     protected PlayerStationControl stationControl;
 
@@ -47,6 +52,9 @@ public class Enemy : MonoBehaviour, IAttacker, IDamageable, ITarget
         Destroy(obj, 3);
 
         stationControl = GameController.Instance?.Station;
+        audioSource = GetComponent<AudioSource>();
+
+        audioSource.PlayOneShot(spawnSound);
 
         currentHealth = data.maxHealth;
         aiAgent = GetComponent<IAstarAI>();
@@ -122,6 +130,7 @@ public class Enemy : MonoBehaviour, IAttacker, IDamageable, ITarget
         if (target != null)
         {
             target.TakeDamage(data.attackDamage);
+            audioSource.PlayOneShot(attackSound);
             Debug.Log($"Атакую! У цели осталось {target.CurrentHealth}");
         }
     }
@@ -160,6 +169,8 @@ public class Enemy : MonoBehaviour, IAttacker, IDamageable, ITarget
                 transform.position,
                 Quaternion.identity
             );
+            if(audioSource != null)
+                audioSource.PlayOneShot(deathSound);
             Destroy(deathParticles, 2f);
         }
 

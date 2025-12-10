@@ -20,3 +20,6 @@ MonoBehaviour:
   movementSpeed: 5
   scrapReward: 100
   prefab: {fileID: 100048, guid: 7ed3e345f07e89940ae0c1e00eeb7d1d, type: 3}
+  attackSound: {fileID: 8300000, guid: d64f62ef115d5f7458c436006a7151fc, type: 3}
+  spawnSound: {fileID: 8300000, guid: 03f5d66fa908a1a4ab56055c38409aba, type: 3}
+  deathSound: {fileID: 8300000, guid: 61bed9d8e3887a94c8ee580c634efd39, type: 3}

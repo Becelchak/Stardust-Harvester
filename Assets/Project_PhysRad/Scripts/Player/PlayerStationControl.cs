@@ -1,9 +1,5 @@
-using Shooter.Gameplay;
 using System;
-using System.Resources;
-using TMPro.EditorUtilities;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class PlayerStationControl : MonoBehaviour, IDamageable
 {

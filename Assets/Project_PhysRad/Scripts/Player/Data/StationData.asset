@@ -17,3 +17,6 @@ MonoBehaviour:
   baseAttackRange: 10
   baseAttackRate: 0.8
   startingScrap: 200
+  stationDestroyEffect: {fileID: 5599717751194728857, guid: 72fe020860306d24789b9f95bf684f3d,
+    type: 3}
+  shootSound: {fileID: 8300000, guid: 342dab6b375d6a144b7a82f07ee185ba, type: 3}

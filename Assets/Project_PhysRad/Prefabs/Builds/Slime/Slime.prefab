@@ -103,7 +103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da9a1bfb7afa2ec4892f9475b2b2763c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Slime
-  buildCost: 40
+  buildCost: 50
   lifetime: 15
   effectRadius: 1
   spawnEffectPrefab: {fileID: 0}

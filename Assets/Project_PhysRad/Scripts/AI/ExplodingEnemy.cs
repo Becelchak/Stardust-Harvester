@@ -1,5 +1,6 @@
-using UnityEngine;
 using Pathfinding;
+using UnityEngine;
+using UnityEngine.Audio;
 
 public class ExplodingEnemy : Enemy
 {
@@ -21,6 +22,7 @@ public class ExplodingEnemy : Enemy
     private bool isExploding = false;
     private GameObject warningEffect;
     private IAstarAI aiAgent;
+    private AudioSource audioSource;
 
     void Start()
     {
@@ -29,6 +31,7 @@ public class ExplodingEnemy : Enemy
         Destroy(obj, 3);
 
         stationControl = GameController.Instance?.Station;
+        audioSource = GetComponent<AudioSource>();
 
         currentHealth = data.maxHealth;
         aiAgent = GetComponent<IAstarAI>();
@@ -56,6 +59,8 @@ public class ExplodingEnemy : Enemy
             Explode();
             return;
         }
+
+        audioSource.PlayOneShot(base.deathSound);
 
         base.Die();
     }

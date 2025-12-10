@@ -22,9 +22,9 @@ namespace YG.EditorScr.BuildModify
         [PostProcessBuild]
         public static void ModifyBuildDo(BuildTarget target, string pathToBuiltProject)
         {
-            ModifyBuildManager.ModifyIndex(pathToBuiltProject);
-            ArchivingBuild.Archiving(pathToBuiltProject);
-            BuildLog.WritingLog(pathToBuiltProject);
+            //ModifyBuildManager.ModifyIndex(pathToBuiltProject);
+            //ArchivingBuild.Archiving(pathToBuiltProject);
+            //BuildLog.WritingLog(pathToBuiltProject);
         }
     }
 }

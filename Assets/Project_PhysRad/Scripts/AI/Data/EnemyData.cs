@@ -16,4 +16,7 @@ public class EnemyData : ScriptableObject
 
     [Header("Other")]
     public GameObject prefab;
+    public AudioClip attackSound;
+    public AudioClip spawnSound;
+    public AudioClip deathSound;
 }

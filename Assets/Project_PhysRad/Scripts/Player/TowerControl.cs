@@ -1,6 +1,7 @@
 using Shooter.Gameplay;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class TowerControl : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class TowerControl : MonoBehaviour
     [Header("Основные настройки")]
     [SerializeField] private float attackRange = 10f;
     [SerializeField] private float attackRate = 1f;
+    [SerializeField] private AudioSource audioSource;
+    public AudioClip shootSound;
 
     [Header("Префабы")]
     [SerializeField] private GameObject projectilePrefab;
@@ -28,6 +31,7 @@ public class TowerControl : MonoBehaviour
             firePoint = transform;
 
         Enemy.OnEnemyDied += OnEnemyDied;
+        audioSource = GetComponent<AudioSource>();
 
         StartCoroutine(ScanForTargets());
     }
@@ -153,6 +157,7 @@ public class TowerControl : MonoBehaviour
 
         var projectale = projectile.GetComponent<Projectile_Base>();
         projectale.Initialize(currentTargetTransform.transform.position, firePoint.position);
+        audioSource.PlayOneShot(shootSound);
 
         Debug.Log($"Башня выстрелила по цели");
     }
