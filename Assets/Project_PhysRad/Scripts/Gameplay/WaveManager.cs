@@ -58,6 +58,7 @@ public class WaveManager : MonoBehaviour
         }
 
         Debug.Log("Волны кончились!");
+        GameController.Instance?.GameOver(true);
     }
     public void CompleteWave()
     {
