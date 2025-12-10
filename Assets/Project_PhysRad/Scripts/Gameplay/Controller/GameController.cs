@@ -79,6 +79,7 @@ public class GameController : MonoBehaviour
     public void GameOver()
     {
         Debug.Log("Game Over!");
+        Time.timeScale = 0;
     }
     /// <summary>Быстрый доступ к скрапу станции</summary>
     public int GetCurrentScrap()

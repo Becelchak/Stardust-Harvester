@@ -102,7 +102,6 @@ public class PlayerStationControl : MonoBehaviour, IDamageable
         Debug.Log("Station destroyed!");
         OnStationDestroyed?.Invoke();
 
-        // Ёффекты
         if (data.stationDestroyEffect != null)
             Instantiate(data.stationDestroyEffect, transform.position, Quaternion.identity);
 
