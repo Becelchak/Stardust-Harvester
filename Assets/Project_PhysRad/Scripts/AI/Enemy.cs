@@ -9,9 +9,9 @@ public class Enemy : MonoBehaviour, IAttacker, IDamageable, ITarget
     protected GameObject m_DeathParticlePrefab;
     [SerializeField]
     protected GameObject m_SpawnParticlePrefab;
-    [SerializeField] private EnemyData data;
+    [SerializeField] protected EnemyData data;
 
-    private PlayerStationControl stationControl;
+    protected PlayerStationControl stationControl;
 
     private IAstarAI aiAgent;
     private IDamageable targetToAttack;
@@ -129,6 +129,7 @@ public class Enemy : MonoBehaviour, IAttacker, IDamageable, ITarget
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
+        Debug.Log("ПОЛУЧИЛ УРОН ОТ ЯДА");
         if (!IsAlive)
         {
             Die();
@@ -217,7 +218,7 @@ public class Enemy : MonoBehaviour, IAttacker, IDamageable, ITarget
         Debug.Log($"Враг сменил цель на: {(newTarget as MonoBehaviour)?.name}");
     }
 
-    private void OnAnyBuildDestroyed(IBuildable destroyedBuild)
+    protected void OnAnyBuildDestroyed(IBuildable destroyedBuild)
     {
         if (currentBuildableTarget != null && currentBuildableTarget == destroyedBuild)
         {

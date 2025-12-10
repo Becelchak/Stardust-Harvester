@@ -33,9 +33,10 @@ public class BuildManager : MonoBehaviour, IGameSystem
             ClearSelection();
     }
 
-    public void SelectBuildable(IBuildable buildable)
+    public void SelectBuildable(IBuildable buildable, GameObject previewBuild)
     {
         selectedBuildable = buildable;
+        buildPreviewPrefab = previewBuild;
 
         if (buildPreviewPrefab != null && selectedBuildable != null)
         {
