@@ -1,9 +1,10 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class GameController : MonoBehaviour
 {
-    // ===== ПРАВИЛЬНАЯ РЕАЛИЗАЦИЯ СИНГЛТОНА =====
     private static GameController _instance;
     public static GameController Instance
     {
@@ -37,19 +38,29 @@ public class GameController : MonoBehaviour
     public BuildManager BuildManager => buildManager;
     public UIManager UI => uiManager;
 
+    private bool isGameActive = true;
+    private bool isPaused = false;
+
     void Awake()
     {
-        // Защита от дублирования синглтона при загрузке новой сцены
         if (_instance != null && _instance != this)
         {
             Destroy(gameObject);
-            return;
+            //return;
         }
 
         _instance = this;
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
 
         InitializeAllSystems();
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape) && isGameActive)
+        {
+            TogglePause();
+        }
     }
 
     void InitializeAllSystems()
@@ -74,13 +85,46 @@ public class GameController : MonoBehaviour
         Debug.Log("All game systems initialized");
     }
 
+    public void TogglePause()
+    {
+        if (isPaused)
+        {
+            ContinueGame();
+        }
+        else
+        {
+            PauseGame();
+        }
+    }
+
+    public void PauseGame()
+    {
+        if (!isGameActive || isPaused) return;
+
+        isPaused = true;
+        Time.timeScale = 0f;
+
+        if (uiManager != null)
+            uiManager.PauseGame();
+
+        Debug.Log("Game Paused");
+    }
+
+    public void ContinueGame()
+    {
+        if (!isPaused) return;
+
+        isPaused = false;
+        Time.timeScale = 1f;
+
+        if (uiManager != null)
+            uiManager.ContinueGame();
+
+        Debug.Log("Game Continued");
+    }
+
     public PlayerStationControl GetStation() => stationControl;
 
-    public void GameOver()
-    {
-        Debug.Log("Game Over!");
-        Time.timeScale = 0;
-    }
     /// <summary>Быстрый доступ к скрапу станции</summary>
     public int GetCurrentScrap()
     {
@@ -102,31 +146,32 @@ public class GameController : MonoBehaviour
     /// <summary>Завершение игры</summary>
     public void GameOver(bool isWin = false)
     {
+        isGameActive = false;
+        isPaused = false;
+
         Debug.Log(isWin ? "VICTORY!" : "GAME OVER");
 
-        // Останавливаем все системы
-        Time.timeScale = 0f;
-
-        // Показываем соответствующее UI
         uiManager?.ShowGameOverScreen(isWin);
-
-        // Можно добавить статистику, сохранение прогресса и т.д.
     }
 
     /// <summary>Перезапуск уровня</summary>
     public void RestartLevel()
     {
         Time.timeScale = 1f;
-        UnityEngine.SceneManagement.SceneManager.LoadScene(
-            UnityEngine.SceneManagement.SceneManager.GetActiveScene().name
-        );
+        isGameActive = true;
+        isPaused = false;
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     /// <summary>Выход в меню</summary>
     public void ReturnToMenu()
     {
         Time.timeScale = 1f;
-        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
+        isGameActive = true;
+        isPaused = false;
+
+        SceneManager.LoadScene("MainMenu");
     }
 
     void OnDestroy()
