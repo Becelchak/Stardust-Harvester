@@ -1,14 +1,5 @@
 fileFormatVersion: 2
 guid: 0fe964e3b1957ff4aa44f9b8e97aadff
-MonoImporter:
-  externalObjects: {}
-  serializedVersion: 2
-  defaultReferences: []
-  executionOrder: 0
-  icon: {instanceID: 0}
-  userData: 
-  assetBundleName: 
-  assetBundleVariant: 
 AssetOrigin:
   serializedVersion: 1
   productId: 295898
@@ -16,3 +7,12 @@ AssetOrigin:
   packageVersion: 1.0
   assetPath: Assets/Project_Shooter/Scripts/AI/Enemy.cs
   uploadId: 691639
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
